@@ -3,8 +3,9 @@ import os
 
 # 定义常量  
 GITLAB_PATH = '/data/app/gitlab'  
-CONTAINER_NAME = 'gitlab'  
-REMOTE_HOST = '116.204.14.247'  
+CONTAINER_NAME = 'gitlab'
+REMOTE_HOST = '116.204.14.247'
+REMOTE_USER = 'root'
 REMOTE_PORT = 2222  
 REMOTE_PATH = '/data/app/gitlab/data'  
 
@@ -14,7 +15,7 @@ def sync_data():
         rsync_command = [  
             'rsync', '-azP', '--delete',  
             f'-e "ssh -p {REMOTE_PORT}"',  
-            f'root@{REMOTE_HOST}:{REMOTE_PATH}',  
+            f'{REMOTE_USER}@{REMOTE_HOST}:{REMOTE_PATH}',  
             GITLAB_PATH  
         ]  
         subprocess.run(rsync_command, check=True)  
